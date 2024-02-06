@@ -1,6 +1,7 @@
 import './App.css';
 
 import { useApi } from './hooks/use-api';
+import AdminComponent from './AdminComponent';
 
 function App() {
   const { response } = useApi();
@@ -8,9 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Test{response}
-        </p>
+        <AdminComponent />
       </header>
     </div>
   );
