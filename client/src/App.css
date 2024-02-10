@@ -19,3 +19,14 @@
 .App-link {
   color: #61dafb;
 }
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 105px;
+  height: auto;
+  margin-right: 100px;
+}
