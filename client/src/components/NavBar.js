@@ -1,21 +1,32 @@
-import React from "react";
-import { Link } from "react-router-dom"; // need to install : npm install react-router-dom
+import React, { useRef } from "react";
+import { Link } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
+  const navRef = useRef();
+
+  const showNavBar = () => {
+    navRef.current.classList.toggle("responsive_nav");
+  };
+
   return (
     <nav className="navbar">
-      <ul className="navbar-nav">
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-        <li className="nav-item">
-          <Link to="/admin" className="nav-link">
-            Admin
-          </Link>
-        </li>
-      </ul>
+      <header>
+        <div className="logo-container">
+          <img src="/favicon.png" alt="Logo" className="logo" />
+        </div>
+        <nav ref={navRef}>
+          <Link to="/" onClick={showNavBar}>Home</Link>
+          <Link to="/admin" onClick={showNavBar}>Admin</Link>
+          <Link to="/exam" onClick={showNavBar}>Exams</Link>
+          <button className="nav-btn nav-close-button" onClick={showNavBar}>
+            <FaTimes />
+          </button>
+        </nav>
+        <button className="nav-btn" onClick={showNavBar}>
+          <FaBars />
+        </button>
+      </header>
     </nav>
   );
 };
