@@ -60,3 +60,15 @@
     padding: 10px 20px; /* Larger horizontal padding for easier pressing */
   }
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  background-color: #7ed8f6e1;
+  color: rgb(0, 0, 0);
+  font-size: 1.3rem;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
