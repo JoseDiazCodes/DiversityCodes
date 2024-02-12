@@ -19,3 +19,44 @@
 .App-link {
   color: #61dafb;
 }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem; 
+  background-color: #7ed8f6e1;
+  color: rgb(0, 0, 0);
+}
+
+.logo-container {
+  margin-right: auto;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+}
+
+.nav-link {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.3rem; 
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  transition: color 0.3s; 
+  border: 2px solid white;
+  padding: 15px;
+  border-radius: 50px;
+}
+
+.nav-link:hover {
+  color: #737dee; 
+}
+
+/* Adjust styles for smaller screens */
+@media (max-width: 600px) {
+  .nav-link {
+    font-size: 1rem; /* Smaller font size for smaller screens */
+    padding: 10px 20px; /* Larger horizontal padding for easier pressing */
+  }
+}
