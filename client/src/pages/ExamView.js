@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useApi } from "../hooks/use-api";
 import { BrowserRouter as Router, Routes, Rout, Link } from "react-router-dom";
+
 function ExamView() {
   const { response, error } = useApi({ path: "exams" });
-
   const [search, setSearch] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
@@ -13,7 +13,7 @@ function ExamView() {
   const handleUpdateExam = (examId) => {
     // TODO: open admin or navigate to an update page
     setIsUpdating(true);
-    setSelectedExamId(examId);
+    setSelectedExamId(examId);    
   };
 
   // deleting an exam
@@ -133,7 +133,7 @@ function ExamView() {
                   </td>
                   <td className="border border-gray-600 px-4 py-2">
                     <a
-                      href="#"
+                      href="/admin"
                       onClick={() => handleUpdateExam(exam._id)}
                       className="text-blue-400 hover:underline"
                     >
