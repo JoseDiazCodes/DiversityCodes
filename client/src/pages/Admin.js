@@ -1,203 +1,162 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useApi } from "../hooks/use-api";
+import { BrowserRouter as Router, Routes, Rout, Link } from "react-router-dom";
 
-const Admin = ({ onAddExam }) => {
-  const [newExam, setNewExam] = useState({
-    patientId: "",
-    age: 0,
-    sex: "",
-    zipCode: 0,
-    bmi: 0,
-    examId: "",
-    keyFindings: "",
-    brixiaScores: "",
-    imageURL: "",
-  });
+function Admin() {
+  const { response, error } = useApi({ path: "exams" });
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewExam((prevExam) => ({
-      ...prevExam,
-      [name]: value,
-    }));
+  const [search, setSearch] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [selectedExamId, setSelectedExamId] = useState(null);
+
+  // updating an exam
+  const handleUpdateExam = (examId) => {
+    // TODO: open admin or navigate to an update page
+    setIsUpdating(true);
+    setSelectedExamId(examId);
   };
 
-  const handleAddExam = () => {
-    onAddExam(newExam);
-    // Clear form after adding exam
-    setNewExam({
-      patientId: "",
-      age: 0,
-      sex: "",
-      zipCode: 0,
-      bmi: 0,
-      examId: "",
-      keyFindings: "",
-      brixiaScores: "",
-      imageURL: "",
-    });
+  // deleting an exam
+  const handleDeleteExam = async (examId) => {
+    // TODO: send a request to backend API to delete the exam
+    setIsDeleting(true);
+    try {
+      const response = await fetch(`/api/exams/${examId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete exam");
+      }
+      // fetch the updated list of exams from the server
+    } catch (error) {
+      console.error("Error deleting exam:", error);
+    } finally {
+      setIsDeleting(false);
+    }
   };
+
+  if (error) {
+    return <div>Error: {JSON.stringify(error)}</div>;
+  }
+
+  if (!response) {
+    return <div>Loading exams data...</div>;
+  }
 
   return (
-    <div
-      className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg"
-      style={{ height: "100vh", maxWidth: "800px", margin: "0 auto" }}
-    >
-      <h2 className="text-2xl font-bold mb-4">Admin Panel</h2>
-      <div className="space-y-4">
-        {/* Create New Exam Button
-        <button className="create-new-exam button bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded mb-4">
-          Create New Exam
-        </button> */}
-        <div className="flex items-center mb-4">
-          <Link
-            to="/exam"
-            className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Back
-          </Link>
+    <div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-4">Admin View</h2>
+      <div className="flex items-center mb-4">
+        <div className="flex-grow">
+          <label className="mr-2">Search:</label>
+          <input
+            type="text"
+            className="border border-gray-600 rounded-md px-2 py-1 text-black"
+            placeholder="Search Patient ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
-
-        {/* Form */}
-        <form>
-          {/* Patient ID */}
-          <div className="mb-4">
-            <label htmlFor="patientId" className="block text-white-300 mb-1">
-              Patient ID:
-            </label>
-            <input
-              type="text"
-              name="patientId"
-              value={newExam.patientId}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Age */}
-          <div className="mb-4">
-            <label htmlFor="age" className="block text-white-300 mb-1">
-              Age:
-            </label>
-            <input
-              type="number"
-              name="age"
-              value={newExam.age}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Sex */}
-          <div className="mb-4">
-            <label htmlFor="sex" className="block text-white-300 mb-1">
-              Sex:
-            </label>
-            <input
-              type="text"
-              name="sex"
-              value={newExam.sex}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Zip Code */}
-          <div className="mb-4">
-            <label htmlFor="zipCode" className="block text-white-300 mb-1">
-              Zip Code:
-            </label>
-            <input
-              type="number"
-              name="zipCode"
-              value={newExam.zipCode}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* BMI */}
-          <div className="mb-4">
-            <label htmlFor="bmi" className="block text-white-300 mb-1">
-              BMI:
-            </label>
-            <input
-              type="number"
-              name="bmi"
-              value={newExam.bmi}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Exam ID */}
-          <div className="mb-4">
-            <label htmlFor="examId" className="block text-white-300 mb-1">
-              Exam ID:
-            </label>
-            <input
-              type="text"
-              name="examId"
-              value={newExam.examId}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Key Findings */}
-          <div className="mb-4">
-            <label htmlFor="keyFindings" className="block text-white-300 mb-1">
-              Key Findings:
-            </label>
-            <input
-              type="text"
-              name="keyFindings"
-              value={newExam.keyFindings}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Brixia Scores */}
-          <div className="mb-4">
-            <label htmlFor="brixiaScores" className="block text-white-300 mb-1">
-              Brixia Scores:
-            </label>
-            <input
-              type="text"
-              name="brixiaScores"
-              value={newExam.brixiaScores}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Image URL */}
-          <div className="mb-4">
-            <label htmlFor="imageURL" className="block text-white-300 mb-1">
-              Image URL:
-            </label>
-            <input
-              type="text"
-              name="imageURL"
-              value={newExam.imageURL}
-              onChange={handleInputChange}
-              className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
-            />
-          </div>
-
-          {/* Add Exam Button */}
-          <button
-            type="button"
-            onClick={handleAddExam}
-            className="bg-gray-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Add Exam
-          </button>
-        </form>
+        <Link
+          to="/admin"
+          className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Create New Exam
+        </Link>
       </div>
+
+      {response && response.exams && Array.isArray(response.exams) && (
+        <table className="border-collapse border border-gray-600 w-full">
+          <thead>
+            <tr className="bg-gray-700">
+              <th className="px-4 py-2">Patient ID</th>
+              <th className="px-4 py-2">Exam ID</th>
+              <th className="px-4 py-2">Age</th>
+              <th className="px-4 py-2">Sex</th>
+              <th className="px-4 py-2">Zip Code</th>
+              <th className="px-4 py-2">BMI</th>
+              <th className="px-4 py-2">Key Findings</th>
+              <th className="px-4 py-2">Brixia Scores</th>
+              <th className="px-4 py-2">Image URL</th>
+              <th className="px-4 py-2">Update</th>
+              <th className="px-4 py-2">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            {response.exams
+              .filter((exam) =>
+                exam
+                  ? exam.patientId
+                      .toLowerCase()
+                      .includes(search.trim().toLowerCase())
+                  : false
+              )
+              .map((exam, index) => (
+                <tr key={exam._id || index} className="bg-gray-800">
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.patientId}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.examId}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.age}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.sex}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.zipCode}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.bmi}
+                  </td>
+
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.keyFindings}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.brixiaScores}
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    <a
+                      href={exam.imageURL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white-400 hover:underline"
+                    >
+                      View Image
+                    </a>
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    <a
+                      href="#"
+                      onClick={() => handleUpdateExam(exam._id)}
+                      className="text-blue-400 hover:underline"
+                    >
+                      Update
+                    </a>
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    <a
+                      href="#"
+                      onClick={() => handleDeleteExam(exam._id)}
+                      className="text-red-400 hover:underline"
+                    >
+                      Delete
+                    </a>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
-};
+}
 
 export default Admin;

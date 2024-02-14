@@ -20,8 +20,8 @@ const NavBar = () => {
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link to="/exam" className="nav-link">
-              Exams
+            <Link to="/admin" className="nav-link">
+              Admin
             </Link>
           </NavigationMenuItem>
           {/* <NavigationMenuItem>

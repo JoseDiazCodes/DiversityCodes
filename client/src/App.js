@@ -5,8 +5,8 @@ import "./App.css"
 // import ExamView from "./pages/ExamView";
 import Home from "./pages/Home"
 import Navbar from "./components/NavBar" // Import Navbar
-import Admin from "./pages/Admin"
-import ExamView from "pages/ExamView"
+import CreateExam from "./pages/CreateExam"
+import Admin from "pages/Admin"
 
 function App() {
 	return (
@@ -14,8 +14,8 @@ function App() {
 			<Navbar /> {/* Render Navbar */}
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="createExam" element={<CreateExam />} />
 				<Route path="admin" element={<Admin />} />
-				<Route path="exam" element={<ExamView />} />
 			</Routes>
 		</div>
 	)
