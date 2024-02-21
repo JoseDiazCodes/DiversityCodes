@@ -1,23 +1,40 @@
+import dotenv from 'dotenv';
+import express from 'express';
+import examRoutes from './routes/exams';
+import mongoose from 'mongoose';
+
+
 require('dotenv').config()
+dotenv.config();
 
-const express = require('express')
+const app = express();
+const examRoutes = require('./routes/exams');
 
-// creates express app
-const app = express()
+// listening for request -- testing 
+app.listen(3000, () => {
+    console.log('listening on port 3000')
+})
 
 // middleware
+app.use(express.json())
 app.use((req, res, next) => {
     console.log(req.path, req.method)
     next()
 })
 
-// react to requests (routes handler)
-app.get('/', (req, res) => {
-    res.json({mssg: 'Welcome to our MERN stack application!'})
-})
+// routes
+app.use('/server/exams', examRoutes)
 
-// listen for requests
-app.listen(process.env.PORT, () => {
-    console.log('listening on port', process.env.PORT)
-})
+// connect to database
+mongoose.connect(process.env.DB_STRING)
+    .then(() => {
+    // listen for requests
+    app.listen(process.env.PORT, () => {
+        console.log('connected to db & listening on port', process.env.PORT)
+    })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
 
+process.env
