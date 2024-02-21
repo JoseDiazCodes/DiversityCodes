@@ -2,35 +2,30 @@
 //router.get("/exams", getAllExams)
 
 const express = require('express')
+const ExamSchema = require('../models/ExamSchema')
+const {
+    createExam,
+    getAllExams,
+    getExamById,
+    deleteExam,
+    updateExam
+} = require('../controllers/exam')
 
 const router = express.Router()
 
 // GET all exams 
-router.get('/', (req, res) => {
-    res.json({mssg: 'GET all exams'})
-})
+router.get('/', getAllExams)
 
 // GET single exam
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single exam'})
-})
+router.get('/:id', getExamById)
 
 // POST a new exam
-router.post("/", (req, res) => {
-    //req.body
-    res.json({mssg: 'POST a new exam'})
-})
+router.post('/', createExam) 
 
 // DELETE a exam
-router.delete("/:id", (req, res) => {
-    res.json({mssg: 'DELETE a exam'})
-})
+router.delete("/:id", deleteExam)
 
 // UPDATE a exam
-router.patch("/:id", (req, res) => {
-    res.json({mssg: ' UPDATE a exam'})
-})
+router.patch("/:id", updateExam)
 
 module.exports = router
-
-
