@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { useApi } from "../hooks/use-api";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 // import SinglePatientView from "components/SinglePatientView";
 import SingleExamView from "components/SingleExamView";
+import UpdateExam from "components/UpdateExam";
+
 
 function ExamView() {
   const { response, error } = useApi({ path: "exams" });
@@ -13,9 +16,12 @@ function ExamView() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [selectedExamId, setSelectedExamId] = useState(null);
 
+  const navigate = useNavigate();
+
   // updating an exam
   const handleUpdateExam = (examId) => {
     // TODO: open admin or navigate to an update page
+    navigate(`/updateExam/${examId}`);
     setIsUpdating(true);
     setSelectedExamId(examId);
   };
@@ -155,7 +161,7 @@ function ExamView() {
                   <td className="border border-gray-600 px-4 py-2">
                     <a
                       href="#"
-                      onClick={() => handleUpdateExam(exam._id)}
+                      onClick={() => handleUpdateExam(exam._Id)}
                       className="text-blue-400 hover:underline"
                     >
                       Update
@@ -182,6 +188,7 @@ function ExamView() {
 
 <Routes>
   <Route path="/exam/:examId" element={<SingleExamView />} />
+  <Route path="/updateExam/:examId" element={<UpdateExam />} />
 </Routes>
 
 export default ExamView;

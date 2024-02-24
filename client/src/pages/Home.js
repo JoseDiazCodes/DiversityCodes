@@ -1,102 +1,37 @@
-import React, { useState } from "react";
-import { useApi } from "../hooks/use-api";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Home = () => {
-  const { response, error } = useApi({ path: "exams" });
-  const [search, setSearch] = useState("");
-
-  if (error) {
-    return <div className="text-red-500">Error: {JSON.stringify(error)}</div>;
-  }
-
-  if (!response) {
-    return <div className="text-blue-500">Loading exams data...</div>;
-  }
-
-  return (
-    <div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4">Home View</h2>
-      <div className="mb-4">
-        Search:
-        <input
-          type="text"
-          className="border border-gray-600 rounded-md px-2 py-1 ml-2 text-black"
-          placeholder="Search Patient ID"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+function Home() {
+  return ( 
+    <div style={{ backgroundColor: "#1a202c" }} className="min-h-screen relative">
+      <header className="bg-blue-400 text-white py-4">
+        <div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
+          <h1 className="text-3xl font-bold">DiversityCodes</h1>
+          <h3 className="text-3xl font-bold" style={{ color: '#f87171' }}>Doctor Database</h3>
+        </div>
+      </header>
+      {/* Half-circle */}
+      <div className="half-circle"></div>
+      <div className="absolute bottom-0 right-20 mb-40">
+        <div className="logo-container2">
+          <img src="/favicon.png" alt="hacksLogo" className="logo" />
+        </div>
       </div>
-      {response && response.exams && Array.isArray(response.exams) && (
-        <table className="border-collapse border border-gray-600 w-full">
-          <thead>
-            <tr className="bg-gray-700">
-              <th className="px-4 py-2">Patient ID</th>
-              <th className="px-4 py-2">Exam ID</th>
-              <th className="px-4 py-2">Age</th>
-              <th className="px-4 py-2">Sex</th>
-              <th className="px-4 py-2">Zip Code</th>
-              <th className="px-4 py-2">BMI</th>
-              <th className="px-4 py-2">Key Findings</th>
-              <th className="px-4 py-2">Brixia Scores</th>
-              <th className="px-4 py-2">Image URL</th>
-            </tr>
-          </thead>
-          <tbody>
-            {response.exams
-              .filter((exam) =>
-                exam
-                  ? exam.patientId
-                      .toLowerCase()
-                      .includes(search.trim().toLowerCase())
-                  : false
-              )
-              .map((exam, index) => (
-                <tr key={exam._id || index} className="bg-gray-800">
-                  <td className="border border-gray-600 px-4 py-2">
-                    <Link to={`/patient/${exam.patientId}`} className="hover:underline">
-                      {exam.patientId}
-                    </Link>
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.examId}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.age}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.sex}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.zipCode}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.bmi}
-                  </td>
-
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.keyFindings}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.brixiaScores}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    <a
-                      href={exam.imageURL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:underline"
-                    >
-                      View Image
-                    </a>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
-      )}
+      {/* Main content */}
+      <main className="container mx-auto mt-8 px-4">
+        <section className="my-8">
+          <h2 className="text-2xl font-semibold text-blue-300 mb-4">About Us</h2>
+          <p className="text-lg font-semibold text-white-700">
+            Welcome to our MERN stack application.
+            A application that allows doctors to 
+            Create, Read, Update, and Delete (CRUD) 
+            structured radiology reports as an assesment 
+            of x-rays images for exams of patients with COVID-19.
+          </p>
+        </section>
+      </main>
     </div>
   );
-};
+}
 
 export default Home;

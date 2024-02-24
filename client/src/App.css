@@ -1,4 +1,3 @@
-/* App Styles */
 .App {
   text-align: center;
 }
@@ -21,7 +20,6 @@
   color: #61dafb;
 }
 
-/* Navbar Styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -51,9 +49,8 @@
   color: #737dee;
 }
 
-/* Container Styles */
 .container {
-  max-width: 100; /* Adjust the max-width as needed */
+  max-width: 100%;
   margin: 0 auto;
   padding: 70px;
   background-color: #1a202c;
@@ -63,7 +60,6 @@
   display: flex;
   justify-content: space-between;
 }
-
 
 .container-back {
   max-width: 100px;
@@ -75,7 +71,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Info Styles */
 .patient-info,
 .exam-info {
   max-width: 100%;
@@ -83,26 +78,21 @@
   color: white;
   padding: 40px;
   border-radius: 60px;
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .info-item {
-  
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  margin-bottom: 5px; 
+  margin-bottom: 5px;
   margin-top: 20px;
   display: grid;
-  
 }
-
 
 .info-column {
   flex: 1;
   color: #737dee;
-  
 }
 
-/* Button Styles */
 .button {
   background-color: #4a5568;
   color: white;
@@ -118,6 +108,83 @@
   background-color: #2d3748;
 }
 
+/* Update Exam Page Styling */
+.update-container {
+  background-color: #2d3748;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.update-container h1,
+.update-container h2 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.update-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #000000;
+}
+
+.update-container label {
+  margin-bottom: 0.25rem;
+  display: block;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: #ffffff;
+  width: 100%;
+}
+
+.update-container input {
+  margin-bottom: 1.5rem;
+  display: block;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.3);
+  border-radius: 0.375rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #4a5568;
+  color: #ffffff;
+  width: 100%;
+}
+
+/* Update Exam Page Buttons Styling */
+.update-container button {
+  background-color: gray;
+  color: white;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.update-container button:hover {
+  background-color: #4b5563;
+}
+
+.half-circle {
+  width: 500px;
+  height: 420px;
+  background-color: #4c88af;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-top-left-radius: 100%;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
 .footer {
   display: flex;
   justify-content: center;
@@ -128,4 +195,70 @@
   font-size: 1.3rem;
   font-weight: bold;
   font-family: 'Roboto', sans-serif;
+}
+
+
+/* Update Exam Page Styling */
+.update-container {
+  background-color: #2d3748;
+  color: white;
+  padding: 1.5rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  height: 100vh;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.update-container h1, h2 {
+  font-size: 2em;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.update-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  color: #000000;
+}
+
+.update-container label {
+  margin-bottom: .25rem;
+  display: block;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: #ffffff;
+  width: 100%;
+}
+
+.update-container input {
+  margin-bottom: 1.5rem;
+  display: block;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.3);;
+  border-radius: 0.375rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: #4a5568;
+  color: #ffffff;
+  width: 100%;
+}
+
+/* Update Exam Page Buttons Styling */
+.update-container button {
+  background-color: gray;
+  color: white;
+  font-weight: bold;
+  padding: 2px 4px;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.update-container button:hover {
+  background-color: #4b5563;
 }

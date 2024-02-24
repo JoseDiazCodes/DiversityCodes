@@ -37,3 +37,28 @@ export const getExamsByPatientId = async (req, res) => {
 		res.status(500).json({ message: error.message })
 	}
 }
+
+// Get a single exam by ID
+export const getSingleExam = async (req, res) => {
+	const { id } = req.params
+	// Your logic here
+}
+
+// Post a new exam
+export const postNewExam = async (req, res) => {
+	const newExam = req.body
+	// Your logic here
+}
+
+// Delete an exam by ID
+export const deleteExam = async (req, res) => {
+	const { id } = req.params
+	// Your logic here
+}
+
+// Update an existing exam by ID
+export const updateExistingExam = async (req, res) => {
+	const { id } = req.params
+	const updatedExam = req.body
+	// Your logic here
+}

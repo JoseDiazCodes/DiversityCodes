@@ -26,4 +26,11 @@ npm i
 npm start
 ```
 
+Component PatientInfo.js requires
+
+```bash
+cd client/
+npm install axios
+```
+
 You should then be able to visit `localhost:9000` in your browser and see the server running.
