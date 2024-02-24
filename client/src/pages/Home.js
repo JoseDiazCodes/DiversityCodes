@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useApi } from "../hooks/use-api";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 const Home = () => {
   const { response, error } = useApi({ path: "exams" });
@@ -31,11 +32,11 @@ const Home = () => {
           <thead>
             <tr className="bg-gray-700">
               <th className="px-4 py-2">Patient ID</th>
+              <th className="px-4 py-2">Exam ID</th>
               <th className="px-4 py-2">Age</th>
               <th className="px-4 py-2">Sex</th>
               <th className="px-4 py-2">Zip Code</th>
               <th className="px-4 py-2">BMI</th>
-              <th className="px-4 py-2">Exam ID</th>
               <th className="px-4 py-2">Key Findings</th>
               <th className="px-4 py-2">Brixia Scores</th>
               <th className="px-4 py-2">Image URL</th>
@@ -53,8 +54,12 @@ const Home = () => {
               .map((exam, index) => (
                 <tr key={exam._id || index} className="bg-gray-800">
                   <td className="border border-gray-600 px-4 py-2">
-                    {" "}
-                    {exam.patientId}{" "}
+                    <Link to={`/patient/${exam.patientId}`} className="hover:underline">
+                      {exam.patientId}
+                    </Link>
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                    {exam.examId}
                   </td>
                   <td className="border border-gray-600 px-4 py-2">
                     {exam.age}
@@ -68,9 +73,7 @@ const Home = () => {
                   <td className="border border-gray-600 px-4 py-2">
                     {exam.bmi}
                   </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.examId}
-                  </td>
+
                   <td className="border border-gray-600 px-4 py-2">
                     {exam.keyFindings}
                   </td>

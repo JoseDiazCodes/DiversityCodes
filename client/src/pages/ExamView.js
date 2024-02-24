@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { useApi } from "../hooks/use-api";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
+// import SinglePatientView from "components/SinglePatientView";
+import SingleExamView from "components/SingleExamView";
 
 function ExamView() {
   const { response, error } = useApi({ path: "exams" });
@@ -38,6 +42,20 @@ function ExamView() {
     }
   };
 
+  const handleSingleExam = async (examId) => {
+    try {
+      const response = await fetch(`/api/exams/${examId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+    } catch (error) {
+      console.error("Error viewing exam:", error);
+    }
+  }; 
+
   if (error) {
     return <div>Error: {JSON.stringify(error)}</div>;
   }
@@ -49,26 +67,35 @@ function ExamView() {
   return (
     <div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-bold mb-4">Admin View</h2>
-      <div className="mb-4">
-        Search:
-        <input
-          type="text"
-          className="border border-gray-600 rounded-md px-2 py-1 ml-2 text-black"
-          placeholder="Search Patient ID"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className="flex items-center mb-4">
+        <div className="flex-grow">
+          <label className="mr-2">Search:</label>
+          <input
+            type="text"
+            className="border border-gray-600 rounded-md px-2 py-1 text-black"
+            placeholder="Search Patient ID"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        <Link
+          to="/admin"
+          className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+        >
+          Create New Exam
+        </Link>
       </div>
+
       {response && response.exams && Array.isArray(response.exams) && (
         <table className="border-collapse border border-gray-600 w-full">
           <thead>
             <tr className="bg-gray-700">
               <th className="px-4 py-2">Patient ID</th>
+              <th className="px-4 py-2">Exam ID</th>
               <th className="px-4 py-2">Age</th>
               <th className="px-4 py-2">Sex</th>
               <th className="px-4 py-2">Zip Code</th>
               <th className="px-4 py-2">BMI</th>
-              <th className="px-4 py-2">Exam ID</th>
               <th className="px-4 py-2">Key Findings</th>
               <th className="px-4 py-2">Brixia Scores</th>
               <th className="px-4 py-2">Image URL</th>
@@ -88,7 +115,14 @@ function ExamView() {
               .map((exam, index) => (
                 <tr key={exam._id || index} className="bg-gray-800">
                   <td className="border border-gray-600 px-4 py-2">
-                    {exam.patientId}
+                    <Link to={`/patient/${exam.patientId}`} className="hover:underline">
+                      {exam.patientId}
+                    </Link>
+                  </td>
+                  <td className="border border-gray-600 px-4 py-2">
+                  <Link to={`/exam/${exam.examId}`} className="hover:underline">
+                    {exam.examId}
+                  </Link>
                   </td>
                   <td className="border border-gray-600 px-4 py-2">
                     {exam.age}
@@ -101,9 +135,6 @@ function ExamView() {
                   </td>
                   <td className="border border-gray-600 px-4 py-2">
                     {exam.bmi}
-                  </td>
-                  <td className="border border-gray-600 px-4 py-2">
-                    {exam.examId}
                   </td>
                   <td className="border border-gray-600 px-4 py-2">
                     {exam.keyFindings}
@@ -144,8 +175,13 @@ function ExamView() {
           </tbody>
         </table>
       )}
+      
     </div>
   );
 }
+
+<Routes>
+  <Route path="/exam/:examId" element={<SingleExamView />} />
+</Routes>
 
 export default ExamView;

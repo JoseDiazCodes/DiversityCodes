@@ -24,11 +24,11 @@ const NavBar = () => {
               Exams
             </Link>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          {/* <NavigationMenuItem>
             <Link to="/admin" className="nav-link">
               Admin
             </Link>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
     </nav>
