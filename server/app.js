@@ -11,6 +11,8 @@ import { dirname } from "path"
 import mongoose from "mongoose"
 import ConnectMongo from "connect-mongo"
 import session from "express-session"
+// Import the exams router
+import examsRouter from "./routes/exams.js"
 
 dotenv.config({ path: "./.env" })
 
@@ -24,8 +26,11 @@ connectDB()
 
 const app = express()
 
-// Connect to the database
+// Use the exams router for all requests that start with '/api/exams'
+// This means that the routes defined in the exams router will be prefixed with '/api/exams'
+app.use("/api/exams", examsRouter)
 
+// Connect to the database
 const MongoStore = ConnectMongo.create({
 	mongoUrl: process.env.DB_STRING,
 })
