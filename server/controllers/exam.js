@@ -18,22 +18,22 @@ export const getAllExams = async (req, res) => {
 		res.status(500).json({ message: error.message })
 	}
 }
-
 export const getExamById = async (req, res) => {
-	const { id } = req.params
-	if (!mongoose.Types.ObjectId.isValid(id)) {
-		return res.status(404).json({ error: "No such exam" })
-	}
+	const { examId } = req.params;
+	
+	console.log(`Fetching details for examId: ${examId}`);
 	try {
-		const exam = await MGHData.findById(id)
-		if (!exam) {
-			return res.status(404).json({ message: "MGHData not found" })
-		}
-		res.status(200).json(exam)
+		const exams = await MGHData.find({ examId })
+	  if (!exam) {
+		return res.status(404).json({ message: "Exam not found" });
+	  }
+	  res.status(200).json(exam);
 	} catch (error) {
-		res.status(500).json({ message: error.message })
+	  console.error(`Error fetching details for examId: ${examId}`, error);
+	  res.status(500).json({ message: error.message });
 	}
 }
+
 export const getExamsByPatientId = async (req, res) => {
 	const { patientId } = req.params
 	console.log(`Fetching exams for patientId: ${patientId}`)
