@@ -1,7 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////UPDATED CODE FOR EXAM VIEW ////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-
 import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
@@ -10,38 +6,6 @@ function ExamView() {
 	const [error, setError] = useState(null)
 
 	const [search, setSearch] = useState("")
-
-	/////////////////////////////////////////////////////
-	/////////DELETE BUTTON COMPLETED !!!!!!!!!! ////////
-	/////////////////////////////////////////////////////
-	const handleDeleteExam = async (examId) => {
-		// console.log(alert("DELETE BUTTON CLICKED"));
-		console.log("Deleting Exam with ID: ", examId) // Log the message in the console
-		try {
-			const response = await fetch(
-				`${process.env.REACT_APP_API_BASE_URL}/server/exams/${examId}`,
-				{
-					method: "DELETE",
-				}
-			)
-			if (!response.ok) {
-				throw new Error(`Failed to Delete Exam with ID ${examId}`)
-			}
-			// filter out the deleted exam from the state
-			setExams(exams.filter((exam) => exam._id !== examId))
-		} catch (error) {
-			console.error("Error Deleting exam: ", error)
-			setError(error.message)
-		}
-	}
-
-	/////////////////////////////////////////////////////
-	/////////Update BUTTON In Progress !!!!!!!!!! ////////
-	/////////////////////////////////////////////////////
-	// TODO
-	const handleUpdateExam = (input) => {
-		console.log(alert("EXAM UPDATE CLICKED"))
-	}
 
 	useEffect(() => {
 		// Function to fetch data from the server
@@ -87,9 +51,8 @@ function ExamView() {
 	return (
 		<div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
 			<div className="border-4 border-blue-300 rounded-lg p-4 mb-4">
-				<h2 className="text-3xl font-bold mb-4">Admin View</h2>
+				<h2 className="text-3xl font-bold mb-4">Exam View</h2>
 				<div className="flex-grow">
-					{/* SEARCH FUNCTIONALITY */}
 					<label className="mr-2">Search:</label>
 					<input
 						type="text"
@@ -98,16 +61,11 @@ function ExamView() {
 						value={search}
 						onChange={(e) => setSearch(e.target.value)}
 					/>
-					{/* CREATE NEW EXAM BUTTON */}
-					<Link
-						to="/admin"
-						className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded ml-4"
-					>
-						Create New Exam
-					</Link>
 				</div>
 			</div>
-
+			<div className="flex justify-center">
+				<div style={{ marginBottom: "10px" }}></div>
+			</div>
 			{error && <div>Error: {error.message}</div>}
 
 			{exams.length === 0 && !error && <div>Loading exams data...</div>}
@@ -127,8 +85,6 @@ function ExamView() {
 							<th className="px-4 py-2">ICU Admit</th>
 							<th className="px-4 py-2">Number of Admits</th>
 							<th className="px-4 py-2">Mortality</th>
-							<th className="px-4 py-2">Update</th>
-							<th className="px-4 py-2">Delete</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -183,24 +139,7 @@ function ExamView() {
 									<td className="border border-gray-600 px-4 py-2">
 										{exam.mortality}
 									</td>
-									<td className="border border-gray-600 px-4 py-2">
-										<a
-											href="#"
-											onClick={() => handleUpdateExam(exam._id)}
-											className="text-blue-400 hover:underline"
-										>
-											Update
-										</a>
-									</td>
-									<td className="border border-gray-600 px-4 py-2">
-										<a
-											href="#"
-											onClick={() => handleDeleteExam(exam._id)}
-											className="text-red-400 hover:underline"
-										>
-											Delete
-										</a>
-									</td>
+
 									{/* <td className="border border-gray-600 px-4 py-2">
                   <Link
                     to={`/exams/${exam._id}`}

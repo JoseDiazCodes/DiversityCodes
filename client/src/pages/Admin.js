@@ -59,7 +59,7 @@ const Admin = ({ onAddExam }) => {
         </button> */}
         <div className="flex items-center mb-4">
           <Link
-            to="/exam"
+            to="/adminView"
             className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
           >
             Back

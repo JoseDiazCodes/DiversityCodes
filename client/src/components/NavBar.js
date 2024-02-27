@@ -15,13 +15,19 @@ const NavBar = () => {
       <NavigationMenu>
         <NavigationMenuList className="space-x-4">
           <NavigationMenuItem>
-            <Link to="/" className="nav-link">
+            <Link to="/" className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
               Home
             </Link>
           </NavigationMenuItem>
           <NavigationMenuItem>
-            <Link to="/exam" className="nav-link">
+            <Link to="/examTable" className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
               Exams
+            </Link>
+          </NavigationMenuItem>
+          
+          <NavigationMenuItem>
+            <Link to="/adminView" className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded">
+              Admin
             </Link>
           </NavigationMenuItem>
           {/* <NavigationMenuItem>

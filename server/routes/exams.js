@@ -12,11 +12,11 @@ const router = express.Router()
 
 router.get("/", getAllExams)
 router.get("/patient/:patientId", getExamsByPatientId)
-router.get("/exam/:examId", getExamById)
+router.get("/patient/:patientId/exam/:examId", getExamById)
+
 router.post("/", createExam)
 router.delete("/:id", deleteExam)
 router.patch("/:id", updateExam)
-
 
 export default router
 

@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #2d3748;
+  color: #ffffff; /* White text */
 }
 
 .App-logo {
@@ -25,8 +27,36 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: #ffffffe1;
-  color: rgb(0, 0, 0);
+  background-color: #20293a; /* Dark blue color */
+  color: #ffffff; /* White text */
+}
+
+.nav-link {
+  font-size: 1.3rem;
+  color: #ffffff; /* White text */
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link:hover {
+  color: #737dee; /* Light blue color on hover */
+}
+
+
+/* Rounded buttons */
+.button {
+  background-color: #4a5568; /* Dark gray */
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #2d3748; /* Darker gray on hover */
 }
 
 .logo-container {
@@ -40,7 +70,7 @@
 
 .nav-link {
   font-size: 1.3rem;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   transition: color 0.3s;
 }
@@ -190,11 +220,11 @@
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
-  background-color: white;
-  color: rgb(0, 0, 0);
+  background-color: #20293a;
+  color: rgb(255, 255, 255);
   font-size: 1.3rem;
   font-weight: bold;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Helvetica', sans-serif;
 }
 
 
