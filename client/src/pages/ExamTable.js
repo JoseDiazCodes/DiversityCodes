@@ -51,7 +51,7 @@ function ExamView() {
 	return (
 		<div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
 			<div className="border-4 border-blue-300 rounded-lg p-4 mb-4">
-				<h2 className="text-3xl font-bold mb-4">Exam View</h2>
+				<h2 className="text-3xl font-bold mb-4">Patient Database</h2>
 				<div className="flex-grow">
 					<label className="mr-2">Search:</label>
 					<input
