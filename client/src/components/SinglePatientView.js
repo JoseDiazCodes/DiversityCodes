@@ -86,6 +86,7 @@
 // }
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const SinglePatientView = () => {
 	const [exams, setExams] = useState([])
@@ -107,6 +108,14 @@ const SinglePatientView = () => {
 	return (
 		<div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
 			<h2 className="text-2xl font-bold mb-4">Exam Details</h2>
+			<div className="flex items-center mb-4">
+				<Link
+					to="/examTable"
+					className="button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+				>
+					Back
+				</Link>
+				</div>
 			<div className="flex-grow">
 				<table className="border-collapse border border-gray-600 w-full">
 					<thead>
@@ -150,6 +159,7 @@ const SinglePatientView = () => {
 						))}
 					</tbody>
 				</table>
+				
 			</div>
 			{/* <Link
 				to="/exam"
@@ -158,6 +168,7 @@ const SinglePatientView = () => {
 				Back
 			</Link> */}
 		</div>
+		
 	)
 }
 

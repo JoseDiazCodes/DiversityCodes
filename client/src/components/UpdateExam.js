@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+/* import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 
@@ -255,3 +255,175 @@ export default UpdateExam;
 // }
 // export default UpdateExam
 // >>>>>>> main
+*/
+
+// BASIC UPDATE PAGE DESIGN - EMILY
+import React, { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+
+const UpdateExam = () => {
+  const [exam, setExam] = useState(null);
+  const { patientId, examId } = useParams();
+
+  useEffect(() => {
+    const fetchExam = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_BASE_URL}/server/exams/patient/${patientId}/exam/${examId}`,
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setExam(data);
+      } catch (error) {
+        console.error("Error fetching exam:", error);
+      }
+    };
+    fetchExam();
+  }, [patientId, examId]);
+
+  const handleUpdate = (field, value) => {
+    setExam((prevExam) => ({
+      ...prevExam,
+      [field]: value,
+    }));
+  };
+
+  return (
+    <div className="admin-container bg-gray-800 text-white p-6 rounded-lg shadow-lg">
+      <div className="border-4 border-blue-300 rounded-lg p-4 mb-4">
+        <h2 className="text-3xl font-bold mb-4">Edit Exam</h2>
+        <div className="flex justify-center ">
+          <Link
+            to="#"
+            className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded ml-4"
+          >
+            Update
+          </Link>
+          <Link
+            to="/adminView"
+            className="create-new-exam button bg-blue-700 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded ml-4"
+          >
+            Back
+          </Link>
+        </div>
+      </div>
+      <div
+        className="bg-gray-800 shadow-md rounded-lg p-6"
+        style={{ maxWidth: "1000px", margin: "0 auto" }}
+      >
+        <div className="info-container flex">
+          <div className="info-column flex-5 pr-4">
+            <div className="patient-info">
+              <h2 className="text-2xl font-bold mb-4">Patient Info</h2>
+              <div className="info-item mb-4">
+                <label htmlFor="patientId">Patient ID:</label>
+                <input
+                  type="text"
+                  name="patientId"
+                  value={exam ? exam.patientId : ""}
+                  onChange={(e) => handleUpdate("patientId", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="age">Age:</label>
+                <input
+                  type="text"
+                  name="age"
+                  value={exam ? exam.age : ""}
+                  onChange={(e) => handleUpdate("age", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="sex">Sex:</label>
+                <input
+                  type="text"
+                  name="sex"
+                  value={exam ? exam.sex : ""}
+                  onChange={(e) => handleUpdate("sex", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="bmi">BMI:</label>
+                <input
+                  type="text"
+                  name="bmi"
+                  value={exam ? exam.bmi : ""}
+                  onChange={(e) => handleUpdate("bmi", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="zipCode">Zip Code:</label>
+                <input
+                  type="text"
+                  name="zipCode"
+                  value={exam ? exam.zipCode : ""}
+                  onChange={(e) => handleUpdate("zipCode", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="info-column flex-1 pl-4">
+            <div className="exam-info">
+              <h2 className="text-2xl font-bold mb-4">Exam Info</h2>
+              <div className="info-item mb-4">
+                <label htmlFor="examId">Exam ID:</label>
+                <input
+                  type="text"
+                  name="examId"
+                  value={exam ? exam.examId : ""}
+                  onChange={(e) => handleUpdate("examId", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="imageURL">Image URL:</label>
+                <input
+                  type="text"
+                  name="imageURL"
+                  value={exam ? exam.imageURL : ""}
+                  onChange={(e) => handleUpdate("imageURL", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+                {exam && exam.imageURL && (
+                  <img
+                    src={exam.imageURL}
+                    alt="Exam"
+                    className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                  />
+                )}
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="keyFindings">Key Findings:</label>
+                <textarea
+                  name="keyFindings"
+                  value={exam ? exam.keyFindings : ""}
+                  onChange={(e) => handleUpdate("keyFindings", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                ></textarea>
+              </div>
+              <div className="info-item mb-4">
+                <label htmlFor="brixiaScores">Brixia Score:</label>
+                <input
+                  type="text"
+                  name="brixiaScores"
+                  value={exam ? exam.brixiaScores : ""}
+                  onChange={(e) => handleUpdate("brixiaScores", e.target.value)}
+                  className="border border-gray-300 rounded-md px-2 py-1 bg-gray-700 text-white w-full"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UpdateExam;
