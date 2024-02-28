@@ -154,6 +154,7 @@ const UpdateExam = ({ onUpdate }) => {
         </div>
     );
 };
+}
 export default UpdateExam;
 // =======
 // 		const requestOptions = {
