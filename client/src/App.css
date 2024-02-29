@@ -292,3 +292,10 @@
 .update-container button:hover {
   background-color: #4b5563;
 }
+
+.imageDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+}
