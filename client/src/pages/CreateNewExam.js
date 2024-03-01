@@ -38,7 +38,7 @@ const CreateNewExam = ({ onAddExam }) => {
   };
 
   const confirmAddExam = () => {
-    axios.post('http://localhost:9000/server/exams', newExam)
+    axios.post(`${process.env.REACT_APP_API_BASE_URL}/server/exams`, newExam)
       .then(response => {
         console.log(response);
         setNewExam({
